@@ -91,7 +91,7 @@ def main():
 
     # Step 2 - Open WRF file
     try:
-      wrf_file = make_wrf_file(t, argsforecast_offset)
+      wrf_file = make_wrf_file(t, args.forecast_offset)
       ncdata = xr.open_dataset(directory + wrf_file)
       print('Processing: ' + str(t) + ' File: ' + wrf_file)
       
