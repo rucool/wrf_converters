@@ -7,7 +7,9 @@ The most useful functions are:
 * wrfptextract_nc.py - Extract timeseries for a set of specified data points from the newer v3.9 model runs, starting 12/1/2017.
 
 Both of these functions can be run using the following syntax:
+
 `./wrfptextract_grib.py 20141201 -d31 -c wrf_bpu_points.csv -f 1`
+
 * yyyymmdd is the date to start the extraction
 * -d is used to specify the number of days to extract.  The default is 1 day.
 * -c specifies the filename that includes the lat/lon points to extract timeseries data points for
@@ -15,7 +17,7 @@ Both of these functions can be run using the following syntax:
 * -p specifies the prefix to prepend on the outputted file.
 
 
-## Assorted files
+## Converter Script Summary
 
 | Filename          | type  | Model Files| Levels   | Import Lib   | Archive     |
 |-------------------|-------|------------|----------|--------------|-------------|
@@ -29,13 +31,13 @@ Both of these functions can be run using the following syntax:
 | wrfptextract_nc   | point | new netcdf | 4 levels | xarray       |             |
 
 
-## Notes
+### Notes
 * wrfptextract_grib was adapted from wrf2nc
 * wrfptextract_nc was adapted from wrfnc2nc
 
 
-## Data Availabilty
-* NEED TO VERIFY THESE WITH EXACT DATES
+## Model Data Availabilty
+* NEED TO VERIFY THESE WITH EXACT DATES AND LEVELS
 * 8/1/13 and 9/1/13 have the dimensions (11, 376, 390) and heights: [10 60:10:150]
 * 10/1/13 (or perhaps mid Sept) and on has the dimensions (11, 324, 324) and heights
 * 12/1/14 (really 11/28) and on has the dimensions (15, 324, 324)     [10:10:150]
