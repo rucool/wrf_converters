@@ -49,6 +49,7 @@ def main():
   stations = sites.name.astype('S')
   times = pd.date_range(start_date, end_date, freq="H")
   data = np.empty( shape=(len(times),len(stations),len(heights)) ) * np.NAN
+  
   uVel = xr.DataArray(data, coords=[times, stations, heights], dims=['time','station','height'], attrs={
     'units':'m s-1',
     'standard_name':'eastward_wind',
@@ -85,6 +86,15 @@ def main():
     'standard_name':'longitude'
   })
   
+  data1 = np.empty( shape=(len(times),len(stations)) ) * np.NAN
+  swdown = xr.DataArray(data1, coords=[times, stations], dims=['time','station'], attrs={
+    'units':'W/m^2',
+    'standard_name':'swdown',
+    'long_name':'Shortwave down',
+    'comment':'Downward shortwave flux at ground surface.',
+  })
+
+  
   #------------------------------
   # Step 1 - Loop over each hour
   for t in times:
@@ -114,6 +124,8 @@ def main():
         vVel.loc[{'time': t, 'station': stations[index], 'height': 120}] = ncdata.V[0][9][i][j].item()
         uVel.loc[{'time': t, 'station': stations[index], 'height': 140}] = ncdata.U[0][11][i][j].item()
         vVel.loc[{'time': t, 'station': stations[index], 'height': 140}] = ncdata.V[0][11][i][j].item()
+
+        swdown.loc[{'time': t, 'station': stations[index]}] = ncdata.SWDOWN[0][i][j].item()
 
       ncdata.close()
       
@@ -152,7 +164,9 @@ def main():
     'u_velocity':uVel, 'v_velocity':vVel,
     'wind_speed':wind_speed, 'wind_dir':wind_dir, 
     'wind_power':wind_power,
+    'swdown':swdown,
     'latitude':latitude, 'longitude':longitude
+    
   })
   
   # Add global metadata
