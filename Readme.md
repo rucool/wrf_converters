@@ -8,7 +8,7 @@ The most useful functions are:
 
 Both of these functions can be run using the following syntax:
 
-`./wrfptextract_grib.py 20141201 -d31 -c wrf_bpu_points.csv -f 1`
+`./wrfptextract_nc.py 20190401 -d30 -c wrf_bpu_points.csv -f 1`
 
 * yyyymmdd is the date to start the extraction
 * -d is used to specify the number of days to extract.  The default is 1 day.
@@ -21,17 +21,16 @@ Both of these functions can be run using the following syntax:
 
 | Filename          | type  | Model Files| Levels   | Import Lib   | Archive     |
 |-------------------|-------|------------|----------|--------------|-------------|
-| wrf2nc            | point | old grib   | 4 levels | pygrib       | vmt_archive |
+| wrf2nc            | point | old grib   | 4 levels | pygrib       | vmt_archive_old |
 | wrf2nc_oyster     | point | old grib   | 5 levels | pygrib       |             |
 | wrfnc2nc          | point | old netcdf | 4 levels | xarray       |             |
 | wrf_extract       | grid  | old grib   | 10m      | pygrib       | fullgrid_archive |
 | wrfgrid2nc        | grid  | old grib   | all      | pynio        | wrfgrid_archive |
 | bvg_wrfgrid2nc    | grid  | old & new  | all      | pynio/xarray |             |
 | wrfptextract_grib | point | old grib   | 4 levels | pygrib       |             |
-| wrfptextract_nc   | point | new netcdf | 4 levels | xarray       |             |
+| wrfptextract_nc   | point | new netcdf | 4 levels | xarray       | vmt_archive |
 
 
-### Notes
 * wrfptextract_grib was adapted from wrf2nc
 * wrfptextract_nc was adapted from wrfnc2nc
 
@@ -42,6 +41,13 @@ Both of these functions can be run using the following syntax:
 * 10/1/13 (or perhaps mid Sept) and on has the dimensions (11, 324, 324) and heights
 * 12/1/14 (really 11/28) and on has the dimensions (15, 324, 324)     [10:10:150]
 * 6/1/15 and on has the dimensions (20, 324, 324) and heights [10:10:200]
+
+
+## Commly used point files
+* wrf_bpu_points.csv - BPU Data Portal 
+* wrf_ndbc_points.csv - NDBC Buoys in the Mid Atlantic
+* wrf_wea_points.csv - NJ Wind Energy Area (6 points)
+* wrf_vmt_points.csv - Original points for BPU Data Portal
 
 
 This library was developed by Sage Lichtenwalner, with help from Joe Brodie and Jaden Dicopoulos, Rutgers University Center for Ocean Observing Leadership ([RU COOL](https://rucool.marine.rutgers.edu)).
